@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUlr: 'http://localhost/apifasi/',
+ // baseUlr: 'http://localhost/apifasi/', //api en php
+  baseUlr:'http://localhost:3000/product/'
 };
 
 

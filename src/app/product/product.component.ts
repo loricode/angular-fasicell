@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Product } from '../models/product';
 import { ApiService } from '../services/api.service';
+
 
 @Component({
   selector: 'app-product',
@@ -9,6 +11,12 @@ import { ApiService } from '../services/api.service';
 })
 export class ProductComponent implements OnInit {
   
+  productForm = new FormGroup({
+    name: new FormControl(''),
+    price: new FormControl(''),
+    quantity: new FormControl('')
+  });
+ 
   products: Product[] = []
  
   constructor(public apiService:ApiService ) { }
@@ -19,10 +27,17 @@ export class ProductComponent implements OnInit {
 
   getProducts():void{
     this.apiService.getProducts().subscribe(response => {
-    const { products } = response
+    const { products } = response; 
     this.products = products; 
     });
   }
  
+
+  addProduct():void{ 
+    this.apiService.addProduct(this.productForm.value).subscribe(() => {
+      this.getProducts();
+      this.productForm.reset('');
+    })
+  }
 
 }//fin de la clase ProductComponent

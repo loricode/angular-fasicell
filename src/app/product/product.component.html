@@ -1,4 +1,4 @@
-<nav class="navbar navbar-info bg-primary">
+<nav class="navbar navbar-secondary bg-secondary">
     <a class="navbar-brand text-white" href="#">Fasicell</a>
 </nav>
 
@@ -7,7 +7,7 @@
   <div class="row ">
 
        <div class="col-md-8 content">
-            <table class="table table-dark table-bordered table-striped">
+            <table class="table table-secondary table-bordered table-striped">
                 <caption>List of Products </caption>
                 <thead>
                     <th>#</th>
@@ -28,14 +28,18 @@
             </table>
        </div>
 
-  
        
-       <div class="col-md-4 " > 
-       
+       <div class="col-md-4" > 
+         <form class="card p-2" [formGroup]="productForm">
+            <input  formControlName="name" class="p-2 mb-2" placeholder="Name"/>
+            <input  formControlName="price" class="p-2 mb-2" placeholder="Price"/>
+            <input  formControlName="quantity" class="p-2 mb-2" placeholder="Quantity"/>
+            <button (click)="addProduct()" class="btn btn-secondary">
+                 Aceptar
+            </button>
+        </form>
        </div>
 
   </div>
-
-
 
 </div>
