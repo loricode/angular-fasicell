@@ -13,12 +13,16 @@ export class ApiService {
 
   constructor(public http:HttpClient ) { }
 
-  getProducts(){
+  getProducts() {
    return this.http.get<any>(this.baseUrl);
   }
 
-  addProduct(obj:any){
+  addProduct(obj: any) {
     return this.http.post<Product>(this.baseUrl, obj)
+  }
+
+  deleteProduct(id: string) {
+    return this.http.delete<any>(this.baseUrl+id);
   }
 
 }

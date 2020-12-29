@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
     quantity: new FormControl('')
   });
  
-  products: Product[] = []
+  products: Product[] = [];
  
   constructor(public apiService:ApiService ) { }
 
@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
     this.getProducts();
   }
 
-  getProducts():void{
+  getProducts(): void {
     this.apiService.getProducts().subscribe(response => {
     const { products } = response; 
     this.products = products; 
@@ -33,11 +33,21 @@ export class ProductComponent implements OnInit {
   }
  
 
-  addProduct():void{ 
+  addProduct(): void { 
     this.apiService.addProduct(this.productForm.value).subscribe(() => {
       this.getProducts();
       this.productForm.reset('');
     })
+  }
+
+  deleteProduct(id: string): void {
+    if(window.confirm("¿seguro que vas a eliminar?")){
+       this.apiService.deleteProduct(id).subscribe(() => {     
+         this.getProducts();
+       },(error) => {
+         console.error(error);
+     })
+    }        
   }
 
 }//fin de la clase ProductComponent

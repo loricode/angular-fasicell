@@ -23,6 +23,11 @@
                         <td>{{product.name}}</td>
                         <td>{{product.price}}</td>
                         <td>{{product.quantity}}</td>
+                        <td><button class="btn btn-danger"
+                                   (click)="deleteProduct(product.id)">
+                              delete
+                           </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -30,7 +35,7 @@
 
        
        <div class="col-md-4" > 
-         <form class="card p-2" [formGroup]="productForm">
+         <form class="card border-secondary p-2" [formGroup]="productForm">
             <input  formControlName="name" class="p-2 mb-2" placeholder="Name"/>
             <input  formControlName="price" class="p-2 mb-2" placeholder="Price"/>
             <input  formControlName="quantity" class="p-2 mb-2" placeholder="Quantity"/>
