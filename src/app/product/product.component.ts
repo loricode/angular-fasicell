@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
   });
  
   products: Product[] = [];
- 
+  id = '';
   constructor(public apiService:ApiService ) { }
 
   ngOnInit(): void {
@@ -40,14 +40,37 @@ export class ProductComponent implements OnInit {
     })
   }
 
+
   deleteProduct(id: string): void {
-    if(window.confirm("¿seguro que vas a eliminar?")){
-       this.apiService.deleteProduct(id).subscribe(() => {     
+    if(window.confirm("¿Estas seguro de querer eliminar?")){
+       this.apiService.deleteProduct(id).subscribe(() => {   
          this.getProducts();
        },(error) => {
          console.error(error);
      })
     }        
   }
+
+  getProduct(id: string): void {
+    this.apiService.getProduct(id).subscribe(response => { 
+       const { id, name, price, quantity } = response.data; 
+       this.id = id;  
+       this.productForm.setValue({name, price, quantity});
+     },(error) => {
+       console.error(error);
+     })
+  }
+
+  updateProduct():void {
+    const obj = this.productForm.value;
+    obj.id = this.id;
+    this.apiService.updateProduct(obj).subscribe(() => { 
+      this.getProducts();
+      this.productForm.reset('');
+     },(error) => {
+       console.error(error);
+    })
+  }
+  
 
 }//fin de la clase ProductComponent
